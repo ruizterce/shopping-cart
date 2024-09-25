@@ -1,0 +1,35 @@
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import NavBar from "../src/components/NavBar";
+
+describe("NavBar", () => {
+    it("renders navigation element", () => {
+        render(
+            <MemoryRouter>
+              <NavBar />
+            </MemoryRouter>
+          );
+    
+        // Check if "Home" text is rendered
+        const navElement = screen.getByRole('navigation');
+        expect(navElement).toBeInTheDocument();
+      });
+    
+  it("renders navigation links", () => {
+    render(
+      <MemoryRouter>
+        <NavBar />
+      </MemoryRouter>
+    );
+
+    // Check if "Home" link is present
+    const homeLink = screen.getByText(/Home/i);
+    expect(homeLink).toBeInTheDocument();
+    expect(homeLink.getAttribute('href')).toBe("/");
+
+    // Check if "Shop" link is present
+    const shopLink = screen.getByText(/Shop/i);
+    expect(shopLink).toBeInTheDocument();
+    expect(shopLink.getAttribute('href')).toBe("/shop");
+  });
+});
