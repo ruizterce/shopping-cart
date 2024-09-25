@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import styles from './Shop.module.css';
 
 export default function Shop() {
@@ -6,6 +7,8 @@ export default function Shop() {
     const [products, setProducts] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { cart, addToCart } = useOutletContext(); // Get cart and addToCart from App via Outlet
+    const [quantities, setQuantities] = useState({}); // Store input quantities for each product
 
     // Fetch products object
     useEffect(() => {
@@ -40,35 +43,51 @@ export default function Shop() {
         return <div>No data available</div>
     }
 
-    console.log(products)
 
-    return <div className={styles.shop}>
+    // Get quantities of each item in cart
+    const getCartQuantity = (productId) => {
+        return cart[productId] || 0; // Get quantity from the cart object or 0 if not present
+      };
+
+    // Handle quantity change in input field
+    const handleQuantityChange = (productId, value) => {
+        setQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [productId]: value,
+        }));
+    };
+
+    const renderCategory = (categoryName) => (
         <div className={styles.category}>
-            <div className={styles.title}>Electronics</div>
+            <div className={styles.title}>{categoryName}</div>
             <div className={styles.cardContainer}>
-                {products.map((item) => (
-                    item.category === 'electronics' &&
-                    <div className={styles.card} key={item.id}>
-                        <img src={item.image} width="50px"></img>
-                        <div className={styles.name} title={item.title}>{item.title}</div>
-                        <div>{item.price}€</div>
-                    </div>
-                ))}
+                {products
+                    .filter((item) => item.category === categoryName.toLowerCase())
+                    .map((item) => (
+                        <div className={styles.card} key={item.id}>
+                            <img src={item.image} width="50px" alt={item.title} />
+                            <div className={styles.name} title={item.title}>{item.title}</div>
+                            <div>{item.price}€</div>
+                            <div>Quantity in Cart: {getCartQuantity(item.id)}</div>
+                            <input type="number" min="0" step="1" value={quantities[item.id] || 1}
+                                onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))} />
+                            <button onClick={() => {
+                                addToCart(item, quantities[item.id]||1);
+                                handleQuantityChange(item.id, 1)
+                                }}>Add to Cart</button>
+                        </div>
+                    ))}
             </div>
         </div>
-        <div className={styles.category}>
-            <div className={styles.title}>Jewelery</div>
-            <div className={styles.cardContainer}>
-                {products.map((item) => (
-                    item.category === 'jewelery' &&
-                    <div className={styles.card} key={item.id}>
-                        <img src={item.image}></img>
-                        <div className={styles.name} title={item.title}>{item.title}</div>
-                        <div>{item.price}€</div>
-                    </div>
-                ))}
-            </div>
-        </div>
+    );
 
-    </div>;
+
+    return (
+        <div className={styles.shop}>
+            {renderCategory('Electronics')}
+            {renderCategory('Jewelery')}
+            {renderCategory(`Men's clothing`)}
+            {renderCategory(`Women's clothing`)}
+        </div>
+    );
 }
