@@ -4,10 +4,15 @@ import { Outlet } from "react-router-dom";
 
 function App() {
 
-  return <>
-    <NavBar />
-    <Outlet />
-  </>;
+  return (
+    <div className="app-layout">
+      <NavBar />
+      <div className="main-content">
+        <Outlet />
+      </div>
+    </div>
+  );
+
 }
 
 export default App;
