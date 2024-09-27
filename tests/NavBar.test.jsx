@@ -32,4 +32,16 @@ describe("NavBar", () => {
     expect(shopLink).toBeInTheDocument();
     expect(shopLink.getAttribute('href')).toBe("/shop");
   });
+  
+  it("displays total number of items in the cart", () => {
+    render(
+      <MemoryRouter>
+        <NavBar totalItems={5} /> {/* Pass totalItems as prop */}
+      </MemoryRouter>
+    );
+
+    const totalItemsElement = screen.getByText(/5/); // Total items should display as 5
+    expect(totalItemsElement).toBeInTheDocument();
+  });
+
 });

@@ -47,7 +47,7 @@ export default function Shop() {
     // Get quantities of each item in cart
     const getCartQuantity = (productId) => {
         return cart[productId] || 0; // Get quantity from the cart object or 0 if not present
-      };
+    };
 
     // Handle quantity change in input field
     const handleQuantityChange = (productId, value) => {
@@ -55,6 +55,12 @@ export default function Shop() {
             ...prevQuantities,
             [productId]: value,
         }));
+    };
+
+    const handleAddToCart = (item) => {
+        const quantityToAdd = quantities[item.id] || 1;
+        addToCart(item, quantityToAdd);
+        handleQuantityChange(item.id, 1); // Reset the quantity input back to 1 after adding
     };
 
     const renderCategory = (categoryName) => (
@@ -71,10 +77,8 @@ export default function Shop() {
                             <div>Quantity in Cart: {getCartQuantity(item.id)}</div>
                             <input type="number" min="0" step="1" value={quantities[item.id] || 1}
                                 onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))} />
-                            <button onClick={() => {
-                                addToCart(item, quantities[item.id]||1);
-                                handleQuantityChange(item.id, 1)
-                                }}>Add to Cart</button>
+                            <button onClick={() => {handleAddToCart(item)
+                            }}>Add to Cart</button>
                         </div>
                     ))}
             </div>
