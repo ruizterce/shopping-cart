@@ -19,6 +19,7 @@
 }
 
 .card {
+  position: relative;
   box-sizing: border-box;
   height: 100%;
   padding: 10px;
@@ -51,11 +52,34 @@
   max-height: 3em;
 }
 
+.addToCart {
+  position: absolute;
+  top:80px;
+  height: fit-content;
+  visibility: hidden;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  input {
+    width: 20%;
+  }
+}
+
+.card:hover .addToCart {
+  visibility: visible;
+}
+
 /* Scrollbar */
 *::-webkit-scrollbar {
   height: 8px;
   width: 8px;
 }
+
 *::-webkit-scrollbar-track {
   border-radius: 4px;
   background-color: #DFE9EB;

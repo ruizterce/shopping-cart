@@ -71,14 +71,17 @@ export default function Shop() {
                     .filter((item) => item.category === categoryName.toLowerCase())
                     .map((item) => (
                         <div className={styles.card} key={item.id}>
+                            <div className={styles.addToCart}>
+                                <div>Quantity in Cart: {getCartQuantity(item.id)}</div>
+                                <input type="number" min="0" step="1" value={quantities[item.id] || 1}
+                                    onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))} />
+                                <button onClick={() => {
+                                    handleUpdateCart(item)
+                                }}>Add to Cart</button>
+                            </div>
                             <img src={item.image} width="50px" alt={item.title} />
                             <div className={styles.name} title={item.title}>{item.title}</div>
                             <div>{item.price}€</div>
-                            <div>Quantity in Cart: {getCartQuantity(item.id)}</div>
-                            <input type="number" min="0" step="1" value={quantities[item.id] || 1}
-                                onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))} />
-                            <button onClick={() => {handleUpdateCart(item)
-                            }}>Add to Cart</button>
                         </div>
                     ))}
             </div>

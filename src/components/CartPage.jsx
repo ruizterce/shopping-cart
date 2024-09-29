@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext } from "react-router-dom"
+import styles from './CartPage.module.css';
 
 
 export default function CartPage() {
@@ -54,7 +55,7 @@ export default function CartPage() {
 
     return (
         <div>
-            <table>
+            <table className={styles.table}>
                 <thead>
                     <tr>
                         <th>ID</th>
