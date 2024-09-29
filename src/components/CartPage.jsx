@@ -7,7 +7,7 @@ export default function CartPage() {
     const [products, setProducts] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { cart } = useOutletContext();
+    const { cart, updateCart } = useOutletContext();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -70,7 +70,7 @@ export default function CartPage() {
                             <td>{product.id}</td>
                             <td>{product.title}</td>
                             <td>{product.price} €</td>
-                            <td>{product.quantity}</td>
+                            <td><button onClick={() => { updateCart(product, -1) }}>-</button> {product.quantity} <button onClick={() => { updateCart(product, 1) }}>+</button></td>
                             <td>{product.price * product.quantity} €</td>
                         </tr>
                     ))}

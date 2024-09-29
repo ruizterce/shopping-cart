@@ -7,7 +7,7 @@ export default function Shop() {
     const [products, setProducts] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { cart, addToCart } = useOutletContext(); // Get cart and addToCart from App via Outlet
+    const { cart, updateCart } = useOutletContext(); // Get cart and updateCart from App via Outlet
     const [quantities, setQuantities] = useState({}); // Store input quantities for each product
 
     // Fetch products object
@@ -57,9 +57,9 @@ export default function Shop() {
         }));
     };
 
-    const handleAddToCart = (item) => {
+    const handleUpdateCart = (item) => {
         const quantityToAdd = quantities[item.id] || 1;
-        addToCart(item, quantityToAdd);
+        updateCart(item, quantityToAdd);
         handleQuantityChange(item.id, 1); // Reset the quantity input back to 1 after adding
     };
 
@@ -77,7 +77,7 @@ export default function Shop() {
                             <div>Quantity in Cart: {getCartQuantity(item.id)}</div>
                             <input type="number" min="0" step="1" value={quantities[item.id] || 1}
                                 onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))} />
-                            <button onClick={() => {handleAddToCart(item)
+                            <button onClick={() => {handleUpdateCart(item)
                             }}>Add to Cart</button>
                         </div>
                     ))}

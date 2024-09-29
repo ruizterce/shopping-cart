@@ -7,13 +7,20 @@ function App() {
 
   const [cart, setCart] = useState({});
 
-  // Function to add items to the cart
-  const addToCart = (product, quantity) => {
+  // Function to add/remove items to/from the cart
+  const updateCart = (product, quantity) => {
     setCart((prevCart) => {
+      const id = product.id;
       const existingQuantity = prevCart[product.id] || 0;
+      const newQuantity = existingQuantity + quantity
+      if (newQuantity<=0){ 
+        const newCart = { ...prevCart };
+        delete newCart[id]; // Remove the product from the newCart
+        return newCart;
+      }
       return {
         ...prevCart,
-        [product.id]: existingQuantity + quantity, // Update quantity or add new item
+        [id]: existingQuantity + quantity, // Update quantity or add new item
       };
     });
   };
@@ -23,7 +30,7 @@ function App() {
     <div className="app-layout">
       <NavBar totalItems={totalItems} />
       <div className="main-content">
-        <Outlet context={{cart, addToCart}} />
+        <Outlet context={{cart, updateCart}} />
       </div>
     </div>
   );
