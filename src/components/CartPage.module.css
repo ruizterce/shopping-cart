@@ -1,54 +1,52 @@
 .table {
-    border-collapse: collapse;
-    margin: 20px auto;
-    width: 95%;
-    font-size: 18px;
-    text-align: left;
+  border-collapse: collapse;
+  margin: 20px auto;
+  width: 95%;
+  font-size: 18px;
+  text-align: left;
 }
 
 .table thead {
-    background-color: #f4f4f4;
-    font-weight: bold;
+  background-color: #f4f4f4;
+  font-weight: bold;
 }
 
 .table th,
 .table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table td:nth-child(2) {
-    white-space: normal;  
-  }
+  white-space: normal;
+}
 
 .table tbody tr:nth-child(even) {
-    background-color: rgb(246, 246, 255);
-
+  background-color: rgb(246, 246, 255);
 }
 
 .table tbody tr:hover {
-    background-color: #f1f1f1;
-
+  background-color: #f1f1f1;
 }
 
 .table tfoot {
-    background-color: #f4f4f4;
-    font-weight: bold;
+  background-color: #f4f4f4;
+  font-weight: bold;
 }
 
 .table button {
-    padding: 5px 10px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .table button:hover {
-    background-color: #2980b9;
+  background-color: #2980b9;
 }

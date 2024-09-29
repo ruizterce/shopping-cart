@@ -12,18 +12,15 @@ const routes = [
     children: [
       {
         path: "",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "shop",
         element: <Shop />,
       },
-      {path:"cart",
-        element: <CartPage />
-      }
-    ]
+      { path: "cart", element: <CartPage /> },
+    ],
   },
-
 ];
 
 export default routes;

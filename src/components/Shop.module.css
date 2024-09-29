@@ -29,8 +29,6 @@
   justify-content: flex-end;
   gap: 10px;
 
-
-
   img {
     width: 100%;
     max-height: 200px;
@@ -38,7 +36,6 @@
     object-position: center;
     display: block;
   }
-
 }
 
 .name {
@@ -54,7 +51,7 @@
 
 .addToCart {
   position: absolute;
-  top:80px;
+  top: 80px;
   height: fit-content;
   visibility: hidden;
   bottom: 10px;
@@ -82,20 +79,20 @@
 
 *::-webkit-scrollbar-track {
   border-radius: 4px;
-  background-color: #DFE9EB;
+  background-color: #dfe9eb;
 }
 
 *::-webkit-scrollbar-track:hover {
-  background-color: #B8C0C2;
+  background-color: #b8c0c2;
 }
 
 *::-webkit-scrollbar-track:active {
-  background-color: #B8C0C2;
+  background-color: #b8c0c2;
 }
 
 *::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: #B8C0C2;
+  background-color: #b8c0c2;
 }
 
 *::-webkit-scrollbar-thumb:hover {
@@ -103,5 +100,5 @@
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background-color: #8390AA;
+  background-color: #8390aa;
 }

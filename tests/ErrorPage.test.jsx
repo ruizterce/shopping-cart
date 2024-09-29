@@ -13,7 +13,7 @@ describe("ErrorPage Component", () => {
     expect(
       screen.getByRole("heading", {
         name: /oh no, nothing found here!/i,
-      })
+      }),
     ).toBeInTheDocument();
 
     const link = screen.getByRole("link", {
