@@ -10,6 +10,7 @@ global.fetch = vi.fn();
 vi.mock("react-router-dom", () => ({
   ...vi.importActual("react-router-dom"),
   useOutletContext: vi.fn(),
+  Link: (props) => <a {...props} />,
 }));
 
 describe("CartPage", () => {

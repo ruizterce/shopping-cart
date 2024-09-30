@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./CartPage.module.css";
 
 export default function CartPage() {
@@ -40,7 +41,14 @@ export default function CartPage() {
   }
 
   if (Object.keys(cart).length === 0) {
-    return <div>Your cart is empty</div>;
+    return (
+      <div>
+        <div>Your cart is empty</div>
+        <div>
+          Go to <Link to="/Shop">our Shop</Link> to add some products
+        </div>
+      </div>
+    );
   }
 
   const cartProductIds = Object.keys(cart).map((id) => parseInt(id));
@@ -53,54 +61,57 @@ export default function CartPage() {
   }, 0);
 
   return (
-    <div>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartProducts.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.title}</td>
-              <td>{product.price} €</td>
-              <td>
-                <button
-                  onClick={() => {
-                    updateCart(product, -1);
-                  }}
-                >
-                  -
-                </button>{" "}
-                {product.quantity}{" "}
-                <button
-                  onClick={() => {
-                    updateCart(product, 1);
-                  }}
-                >
-                  +
-                </button>
-              </td>
-              <td>{product.price * product.quantity} €</td>
+    <div className={styles.cartPage}>
+      <div className={styles.section}>
+        <div className={styles.title}>Your Cart</div>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Total</th>
             </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{totalPrice} €</td>
-          </tr>
-        </tfoot>
-      </table>
+          </thead>
+          <tbody>
+            {cartProducts.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.title}</td>
+                <td>{product.price} €</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      updateCart(product, -1);
+                    }}
+                  >
+                    -
+                  </button>{" "}
+                  {product.quantity}{" "}
+                  <button
+                    onClick={() => {
+                      updateCart(product, 1);
+                    }}
+                  >
+                    +
+                  </button>
+                </td>
+                <td>{product.price * product.quantity} €</td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{totalPrice} €</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
   );
 }

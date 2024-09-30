@@ -70,15 +70,40 @@ export default function Shop() {
             <div className={styles.card} key={item.id}>
               <div className={styles.addToCart}>
                 <div>Quantity in Cart: {getCartQuantity(item.id)}</div>
-                <input
-                  type="number"
-                  min="0"
-                  step="1"
-                  value={quantities[item.id] || 1}
-                  onChange={(e) =>
-                    handleQuantityChange(item.id, Number(e.target.value))
-                  }
-                />
+                <div className={styles.inputContainer}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleQuantityChange(
+                        item.id,
+                        quantities[item.id] > 0 ? quantities[item.id] - 1 : 1,
+                      );
+                    }}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    min="0"
+                    max="3"
+                    step="1"
+                    value={quantities[item.id] || 1}
+                    onChange={(e) =>
+                      handleQuantityChange(item.id, Number(e.target.value))
+                    }
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleQuantityChange(
+                        item.id,
+                        quantities[item.id] ? quantities[item.id] + 1 : 2,
+                      );
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
                 <button
                   onClick={() => {
                     handleUpdateCart(item);
