@@ -17,7 +17,7 @@ describe("Shop", () => {
     fetch.mockClear();
     useOutletContext.mockReturnValue({
       cart: { 1: 2, 2: 1, 3: 0, 8: 3 },
-      addToCart: vi.fn(),
+      updateCart: vi.fn(),
     });
   });
 
@@ -139,10 +139,10 @@ describe("Shop", () => {
       },
     ];
 
-    const mockAddToCart = vi.fn();
+    const mockUpdateCart = vi.fn();
     useOutletContext.mockReturnValue({
       cart: { 1: 2 },
-      addToCart: mockAddToCart,
+      updateCart: mockUpdateCart,
     });
 
     fetch.mockImplementationOnce(() =>
@@ -155,17 +155,17 @@ describe("Shop", () => {
 
     const quantityInput = screen.getByDisplayValue(1);
     fireEvent.change(quantityInput, { target: { value: "3" } });
-    const addToCartButton = screen.getByText(/Add to Cart/i);
+    const updateCartButton = screen.getByText(/Add to Cart/i);
 
-    expect(addToCartButton).toBeEnabled(); // Ensure the button is enabled
+    expect(updateCartButton).toBeEnabled(); // Ensure the button is enabled
 
-    fireEvent.click(addToCartButton);
+    fireEvent.click(updateCartButton);
 
     await waitFor(() => {
-      expect(mockAddToCart).toHaveBeenCalledTimes(1);
+      expect(mockUpdateCart).toHaveBeenCalledTimes(1);
     });
 
-    expect(mockAddToCart).toHaveBeenCalledWith(mockProducts[0], 3); // Check arguments
+    expect(mockUpdateCart).toHaveBeenCalledWith(mockProducts[0], 3); // Check arguments
     expect(quantityInput.value).toBe("1"); // Check if input resets
   });
 });
