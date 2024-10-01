@@ -10,10 +10,10 @@ export default function NavBar({ totalItems }) {
       <Link to="shop" className={styles.link}>
         Shop
       </Link>
-      <Link to="cart" className={styles.link}>
-        Cart
+      <Link to="cart" className={`${styles.cartContainer} ${styles.link}`}>
+        <span>Cart</span>
+        <span className={styles.itemCounter}>{totalItems}</span>
       </Link>
-      <span>{totalItems}</span>
     </nav>
   );
 }
