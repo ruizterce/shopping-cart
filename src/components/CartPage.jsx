@@ -62,56 +62,64 @@ export default function CartPage() {
 
   return (
     <div className={styles.cartPage}>
-      <div className={styles.section}>
-        <div className={styles.title}>Your Cart</div>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Total</th>
+      <div className={styles.title}>Your Cart</div>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartProducts.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.title}</td>
+              <td>{product.price} €</td>
+              <td>
+                <button
+                  className={styles.removeButton}
+                  onClick={() => {
+                    updateCart(product, -product.quantity);
+                  }}
+                >
+                  X
+                </button>
+                <button
+                  className={styles.quantityButton}
+                  onClick={() => {
+                    updateCart(product, -1);
+                  }}
+                >
+                  -
+                </button>
+                {" " + product.quantity + " "}
+                <button
+                  className={styles.quantityButton}
+                  onClick={() => {
+                    updateCart(product, 1);
+                  }}
+                >
+                  +
+                </button>
+              </td>
+              <td>{product.price * product.quantity} €</td>
             </tr>
-          </thead>
-          <tbody>
-            {cartProducts.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.title}</td>
-                <td>{product.price} €</td>
-                <td>
-                  <button
-                    onClick={() => {
-                      updateCart(product, -1);
-                    }}
-                  >
-                    -
-                  </button>{" "}
-                  {product.quantity}{" "}
-                  <button
-                    onClick={() => {
-                      updateCart(product, 1);
-                    }}
-                  >
-                    +
-                  </button>
-                </td>
-                <td>{product.price * product.quantity} €</td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{totalPrice} €</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{totalPrice} €</td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   );
 }
